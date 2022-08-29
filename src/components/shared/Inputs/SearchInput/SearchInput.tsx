@@ -11,7 +11,6 @@ import { Pokemon } from 'components/shared/Pokemon';
 const SearchInput: FC = (props) => {
 
     const context = useContext(PokemonContext);
-    const { team } = context;
 
     const [params, setParams] = useState<string>("");
     const [pokemon, setPokemon] = useState<ISinglePokemonResponse | null>(null);
@@ -33,12 +32,15 @@ const SearchInput: FC = (props) => {
     const renderPokemon = pokemon && <Pokemon pokemon={pokemon} />
 
     return (
-        <>  
-            <label className={styles.labelSearch}>Search pokemons
-                <input className={styles.search} value={params} onChange={inputChangedHandler} placeholder="Search pokemons" />
-            </label>
-            <button className={styles.buttonSearch} onClick={() => handleSearch(+params)}>Search</button>
-            { renderPokemon }
+        <>
+            <section className={styles.search}>
+                <input className={styles.searchBar} value={params} onChange={inputChangedHandler} placeholder="Search Example: 33" />
+                <button className={styles.searchButton} onClick={() => handleSearch(+params)}>Search</button>
+            </section>
+
+            <section className={styles.searchResult}>
+                { renderPokemon }
+            </section>
         </>
     )
 }

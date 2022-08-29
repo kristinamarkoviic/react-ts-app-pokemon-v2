@@ -1,0 +1,21 @@
+.profilePage {
+    min-height: 100vh;
+    padding: 50px;
+}
+
+.profileTitle {
+    color: var(--title-color);
+    text-transform: uppercase;
+}
+
+.pokemonContainer {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: flex-start;
+    width: 100%;
+
+    & > div {
+        min-width: 300px;
+        margin: 10px;
+    }
+}

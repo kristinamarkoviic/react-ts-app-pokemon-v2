@@ -1,0 +1,33 @@
+.search {
+    display: flex;
+    justify-content: space-between;
+}
+
+.searchResult {
+    padding: 25px 0;
+}
+
+.searchBar {
+    width: 90%;
+    outline: none;
+    border: 1px solid;
+    border-color: #e6e9ec;
+    height: 40px;
+    padding-left: 20px;
+    font-size: 14px;
+}
+
+.searchButton {
+    border: none;
+    padding: 10px;
+    background-color: var(--link-color);
+    color: var(--white);
+    transition: 0.3s all;
+    font-size: 14px;
+
+    &:hover {
+        cursor: pointer;
+        background-color: var(--footer-color);
+        color: var(--link-color);
+    }
+}

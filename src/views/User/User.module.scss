@@ -1,0 +1,22 @@
+.userPage {
+    min-height: 100vh;
+    padding: 50px;
+}
+.userProfileTitle {
+    color: var(--title-color);
+    text-transform: uppercase;
+}
+
+.userCard {
+    display: flex;
+    padding: 16px;
+}
+
+.userImage {
+    max-width: 200px;
+    height: 200px;
+}
+
+.userFavourite {
+    background-color: var(--link-color);
+}

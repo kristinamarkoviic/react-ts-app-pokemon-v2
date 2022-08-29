@@ -4,7 +4,7 @@ import styles from './Layout.module.scss';
 import { Header } from 'components/shared/Header';
 import { Footer } from 'components/shared/Footer';
 
-import { PokemonContext } from 'context/PokemonContext';
+import { PokemonContextProvider } from 'context/providers/PokemonContextProvider';
 
 const Layout: FC = (props) => {
     const {children} = props;
@@ -13,7 +13,9 @@ const Layout: FC = (props) => {
         <main>
                 <div className={styles.layoutContainer}>
                     <Header/>
-                    {children}
+                    <PokemonContextProvider>
+                        {children}
+                    </PokemonContextProvider>
                     <Footer/>
                 </div>
         </main>

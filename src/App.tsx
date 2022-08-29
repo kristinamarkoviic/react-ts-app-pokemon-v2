@@ -6,6 +6,7 @@ import './App.scss';
 import { Layout } from 'components/Layout';
 import { HomePage } from 'views/Home';
 import { ProfilePage } from 'views/Profile';
+import { UserPage } from 'views/User';
 
 const App: FC = () => {
   
@@ -15,6 +16,7 @@ const App: FC = () => {
         <Routes>
         <Route path='/' element={ <HomePage /> } />
         <Route path='profile' element={ <ProfilePage /> } />
+        <Route path='user' element={ <UserPage /> } />
         </Routes>
       </Layout>
     </BrowserRouter>

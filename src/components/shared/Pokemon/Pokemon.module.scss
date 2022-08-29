@@ -1,0 +1,45 @@
+.pokemonCard {
+    min-width: 300px;
+    max-width: 350px;
+}
+
+.pokemonImage {
+    width: 180px;
+    max-width: 180px;
+    height: 180px;
+    margin: 0 auto;
+}
+
+.pokemonName {
+    text-transform: capitalize;
+    color: var(--link-color);
+    text-align: center;
+}
+
+
+.pokemonId {
+    color: var(--link-color);
+    font-size: 20px;
+}
+
+.pokemonAddButton {
+    background-color: var(--link-color) !important;
+    color: var(--white) !important;
+
+    &:hover {
+        color: var(--link-color);
+    }
+    &:disabled {
+        background-color: var(--white) !important;
+        color: var(--link-color) !important;
+    }
+}
+
+.pokemonRemoveButton {
+    background-color: var(--warning-light) !important;
+    color: var(--white) !important;
+}
+
+.pokemonProperty {
+    list-style-type: circle;
+}
