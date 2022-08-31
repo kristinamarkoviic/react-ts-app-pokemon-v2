@@ -1,10 +1,12 @@
 import { FC, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { PokemonContext } from 'context/PokemonContext';
 import { Pokemon } from 'components/shared/Pokemon';
 
 import { Typography, Chip, Box } from '@mui/material';
 
-import { useNavigate } from 'react-router-dom';
+
 
 import styles from './Profile.module.scss';
 

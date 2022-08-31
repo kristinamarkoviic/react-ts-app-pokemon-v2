@@ -1,12 +1,12 @@
 import { ChangeEvent, FC, useContext, useState } from 'react';
 
 import { ISinglePokemonResponse } from 'interfaces/Pokemon/ISinglePokemonResponse';
-
 import { PokemonService } from 'services/PokemonService';
 import { PokemonContext } from 'context/PokemonContext';
+import { Pokemon } from 'components/shared/Pokemon';
 
 import styles from './SearchInput.module.scss';
-import { Pokemon } from 'components/shared/Pokemon';
+
 
 const SearchInput: FC = (props) => {
 

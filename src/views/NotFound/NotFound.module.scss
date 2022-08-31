@@ -1,0 +1,32 @@
+.notFoundPage {
+    min-height: 100vh;
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    background-color: var(--page-color)
+}
+
+.notFoundPageImage {
+    min-width: 128px;
+    max-width: 128px;
+    max-width: 216px;
+    max-height: 216px;
+}
+
+.pikachuNotFoundImage {
+    min-width: 216px;
+    min-height: 216px;
+    max-width: 512px;
+    max-height: 512px;
+}
+
+.backLink {
+    height: 20px;
+    &:hover {
+        cursor: pointer;
+        color: var(--white) !important;
+        background-color: var(--link-color);
+    }
+}

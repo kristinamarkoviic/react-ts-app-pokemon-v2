@@ -1,4 +1,5 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
+
 import { SearchInput } from 'components/shared/Inputs/SearchInput';
 
 import { Typography } from '@mui/material';
@@ -8,7 +9,7 @@ const HomePage: FC = (props) => {
 
     return (
         <section className={styles.homePage}>
-           <Typography variant="h6" className={styles.homeTitle} align="center" gutterBottom>
+            <Typography variant="h6" className={styles.homeTitle} align="center" gutterBottom>
                 Search pokemons
             </Typography>
             <SearchInput></SearchInput>

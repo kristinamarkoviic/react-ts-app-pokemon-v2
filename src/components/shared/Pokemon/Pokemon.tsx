@@ -1,26 +1,21 @@
-import { FC, useState, useContext } from 'react';
-import { ISinglePokemonResponse } from 'interfaces/Pokemon/ISinglePokemonResponse';
+import { FC, useContext } from 'react';
+import {Link } from 'react-router-dom';
 
-import styles from './Pokemon.module.scss'
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import { ISinglePokemonResponse } from 'interfaces/Pokemon/ISinglePokemonResponse';
 import { PokemonContext } from 'context/PokemonContext';
-import Accordion from '@mui/material/Accordion';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import AccordionSummary from '@mui/material/AccordionSummary';
+
+import {  Accordion, AccordionDetails, AccordionSummary,  Button, Card, CardActions, CardContent, CardMedia, Tab, Typography } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import styles from './Pokemon.module.scss'
 
 interface IPokemonProps {
     pokemon: ISinglePokemonResponse;
     teamDisplay?: boolean;
+    showRemoveButton?: boolean;
 }
 
 const Pokemon: FC<IPokemonProps> = (props) => {
-    const {pokemon} = props;
+    const {pokemon, teamDisplay, showRemoveButton } = props;
 
     const context = useContext(PokemonContext);
     const {team, handleAddPokemon, handleRemovePokemon} = context;
@@ -41,9 +36,9 @@ const Pokemon: FC<IPokemonProps> = (props) => {
         return <li className={styles.pokemonProperty} key={index}>{ parseName(move.move.name) }</li>
     }).slice(0, 5);
 
-    const renderAddButton = !props.teamDisplay && <Button disabled={team.length > 6} className={styles.pokemonAddButton} onClick={() =>handleAddPokemon(pokemon)}>Add to Team</Button>;
+    const renderAddButton = !teamDisplay && <Button disabled={team.length >= 6} className={styles.pokemonAddButton} onClick={() =>handleAddPokemon(pokemon)}>Add to Team</Button>;
 
-    const renderRemoveButton = team.find(member => member.id === pokemon.id) && <Button className={styles.pokemonRemoveButton} onClick={() =>handleRemovePokemon(pokemon)}>Remove from Team</Button>
+    const renderRemoveButton = (showRemoveButton || team.find(member => member.id === pokemon.id)) && <Button className={styles.pokemonRemoveButton} onClick={() =>handleRemovePokemon(pokemon)}>Remove from Team</Button>
     
     return (
         <Card className={styles.pokemonCard}>
@@ -54,14 +49,14 @@ const Pokemon: FC<IPokemonProps> = (props) => {
             />
             <CardContent>
                 <Typography gutterBottom variant="h5" className={styles.pokemonId} component="div">
-                #{pokemon.id}
+                    #{pokemon.id}
                 </Typography>
                 <Typography gutterBottom variant="h5" className={styles.pokemonName} component="div">
-                {pokemon.name}
+                    {pokemon.name}
                 </Typography>
             </CardContent>
             <CardContent>
-                <Accordion>
+                <Accordion className={styles.pokemonSpecs}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel1a-content"
@@ -75,7 +70,7 @@ const Pokemon: FC<IPokemonProps> = (props) => {
                     </Typography>
                     </AccordionDetails>
                 </Accordion>
-                <Accordion>
+                <Accordion className={styles.pokemonSpecs}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel2a-content"
@@ -89,7 +84,7 @@ const Pokemon: FC<IPokemonProps> = (props) => {
                     </Typography>
                     </AccordionDetails>
                 </Accordion>
-                <Accordion>
+                <Accordion className={styles.pokemonSpecs}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel3a-content"
@@ -103,8 +98,9 @@ const Pokemon: FC<IPokemonProps> = (props) => {
                     </Typography>
                     </AccordionDetails>
                 </Accordion>
+                <Tab className={styles.pokemonLink} label='view profile' value={`/pokemon/${pokemon.id}`} key={pokemon.id} to={`/pokemon/${pokemon.id}`} component={Link} /> 
             </CardContent>
-            <CardActions>
+            <CardActions className={styles.pokemonButtons}>
                 { renderAddButton }
                 { renderRemoveButton }
             </CardActions>

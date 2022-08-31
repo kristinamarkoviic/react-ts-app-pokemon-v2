@@ -7,18 +7,36 @@ import { Layout } from 'components/Layout';
 import { HomePage } from 'views/Home';
 import { ProfilePage } from 'views/Profile';
 import { UserPage } from 'views/User';
+import { SinglePokemonPage } from 'views/Pokemon';
+import { NotFoundPage } from 'views/NotFound';
 
 const App: FC = () => {
   
   return (
     <BrowserRouter>
-      <Layout>
         <Routes>
-        <Route path='/' element={ <HomePage /> } />
-        <Route path='profile' element={ <ProfilePage /> } />
-        <Route path='user' element={ <UserPage /> } />
+              <Route path='/' 
+              element={  
+                <Layout>
+                  <HomePage />
+                </Layout> } />
+              <Route path='profile' 
+              element={ 
+                <Layout>
+                  <ProfilePage />
+                </Layout> } />
+              <Route path='user' 
+              element={
+                <Layout>
+                  <UserPage />
+                </Layout> } />
+              <Route path='pokemon/:id' 
+              element={ 
+                <Layout>
+                  <SinglePokemonPage />
+                </Layout> } />
+              <Route path='*' element={ <NotFoundPage /> } />
         </Routes>
-      </Layout>
     </BrowserRouter>
   );
 }

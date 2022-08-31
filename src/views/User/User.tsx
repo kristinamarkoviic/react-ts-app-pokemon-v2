@@ -1,7 +1,7 @@
 import { FC, useState, useEffect, useContext } from 'react';
 import { PokemonContext } from 'context/PokemonContext';
 
-import { Typography, Card, CardContent, CardMedia, Avatar, Badge } from '@mui/material';
+import { Typography, Card, CardContent, CardMedia, Avatar } from '@mui/material';
 import styles from './User.module.scss';
 import userImage from '../../assets/images/pokemon-trainer.png';
 import favouritePokemon from '../../assets/images/psyduck.png';

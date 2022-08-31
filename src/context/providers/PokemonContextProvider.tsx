@@ -8,8 +8,11 @@ const PokemonContextProvider: FC = (props) => {
     const [team, setTeam] = useState<Array<ISinglePokemonResponse>>([]);
 
     const handleAddPokemon = (pokemon: ISinglePokemonResponse) => {
-        const newTeam = [...team, pokemon];
-        setTeam(newTeam);
+        const checkDuplicates = team.findIndex(member => member.id === pokemon.id);
+        if(checkDuplicates === -1) {
+            const newTeam = [...team, pokemon];
+            setTeam(newTeam);
+        }
     };
 
 

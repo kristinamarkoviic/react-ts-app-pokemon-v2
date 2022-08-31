@@ -1,6 +1,8 @@
 .pokemonCard {
     min-width: 300px;
     max-width: 350px;
+    background-image: linear-gradient(90deg,#f9fef8,#f0feed);
+    color: #43696a;
 }
 
 .pokemonImage {
@@ -42,4 +44,27 @@
 
 .pokemonProperty {
     list-style-type: circle;
+}
+
+.pokemonLink {
+    font-size: 16px !important;
+    text-align: center;
+    width: 100%;
+    color: var(--link-color) !important;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.pokemonSpecs {
+    background-color: var(--accordion-color);
+    color: var(--white);
+
+    svg {
+        color: var(--white);
+    }
+}
+
+.pokemonButtons {
+    justify-content: center;
 }

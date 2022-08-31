@@ -1,0 +1,48 @@
+.singlePokemonPage {
+    min-height: 100vh;
+    padding: 50px;
+}
+
+.pokemonCard {
+    width: 100%;
+    display: flex;
+    background-image: linear-gradient(90deg,#f9fef8,#f0feed);
+}
+
+.pokemonTitle {
+    color: var(--title-color);
+    text-transform: uppercase;
+}
+
+.singlePokemonAbout {
+    width: 50%;
+
+    .pokemonImage {
+        width: 180px;
+        height: 180px;
+    }
+}
+
+.singlePokemonSpecs {
+    width: 50%;
+    position: relative;
+    bottom: 0;
+}  
+
+.pokemonButtons {
+    justify-content: flex-start;
+}
+
+.pokemonName {
+    text-transform: capitalize;
+    color: var(--title-color);
+}
+
+.pokemonImageText {
+    font-size: 14px !important;
+}
+
+.pokemonWidth {
+    color: var(--title-color);
+    font-size: 16px;
+}
