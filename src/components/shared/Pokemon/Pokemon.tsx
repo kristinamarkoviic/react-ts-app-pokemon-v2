@@ -23,21 +23,20 @@ const Pokemon: FC<IPokemonProps> = (props) => {
     const parseName = (name: string) => name.replace('-', " ");
 
     const renderAbilities = pokemon.abilities && 
-        pokemon.abilities.map((ability, index) => {
-            return <li className={styles.pokemonProperty} key={index}>{ parseName(ability.ability.name) }</li>
-        });
+        pokemon.abilities.map((ability, index) => (
+            <li className={styles.pokemonProperty} key={index}>{ parseName(ability.ability.name) }</li>
+        ));
     const renderTypes = pokemon.types && 
-        pokemon.types.map((type, index) => {
-        return <li className={styles.pokemonProperty} key={index}>{ type.type.name }</li>
-    });
+        pokemon.types.map((type, index) => (
+            <li className={styles.pokemonProperty} key={index}>{ type.type.name }</li>
+        ));
 
     const renderMoves = pokemon.moves && 
-        pokemon.moves.map((move, index) => {
-        return <li className={styles.pokemonProperty} key={index}>{ parseName(move.move.name) }</li>
-    }).slice(0, 5);
+        pokemon.moves.map((move, index) => (
+            <li className={styles.pokemonProperty} key={index}>{ parseName(move.move.name) }</li>
+        )).slice(0, 5);
 
     const renderAddButton = !teamDisplay && <Button disabled={team.length >= 6} className={styles.pokemonAddButton} onClick={() =>handleAddPokemon(pokemon)}>Add to Team</Button>;
-
     const renderRemoveButton = (showRemoveButton || team.find(member => member.id === pokemon.id)) && <Button className={styles.pokemonRemoveButton} onClick={() =>handleRemovePokemon(pokemon)}>Remove from Team</Button>
     
     return (
@@ -98,7 +97,7 @@ const Pokemon: FC<IPokemonProps> = (props) => {
                     </Typography>
                     </AccordionDetails>
                 </Accordion>
-                <Tab className={styles.pokemonLink} label='view profile' value={`/pokemon/${pokemon.id}`} key={pokemon.id} to={`/pokemon/${pokemon.id}`} component={Link} /> 
+                <Tab className={styles.pokemonLink} label="view profile" value={`/pokemon/${pokemon.id}`} key={pokemon.id} to={`/pokemon/${pokemon.id}`} component={Link} /> 
             </CardContent>
             <CardActions className={styles.pokemonButtons}>
                 { renderAddButton }

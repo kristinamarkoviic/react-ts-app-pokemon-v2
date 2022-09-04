@@ -7,9 +7,13 @@ const PokemonContextProvider: FC = (props) => {
 
     const [team, setTeam] = useState<Array<ISinglePokemonResponse>>([]);
 
+    //ovde negde setovati i evolucijsku liniju
+
     const handleAddPokemon = (pokemon: ISinglePokemonResponse) => {
+        console.log(pokemon, 'pokemon response')
+        const checkEvolutionChain = team.findIndex(member => member.evolution_chain === pokemon.evolution_chain );
         const checkDuplicates = team.findIndex(member => member.id === pokemon.id);
-        if(checkDuplicates === -1) {
+        if((checkEvolutionChain === -1) && (checkDuplicates === -1)) {
             const newTeam = [...team, pokemon];
             setTeam(newTeam);
         }

@@ -11,9 +11,9 @@ const NotFoundPage: FC = (props) => {
 
     return (
         <section className={styles.notFoundPage}>
-            <img className={styles.notFoundPageImage} src={notFoundImage} alt='Not found image' />
-            <img className={styles.pikachuNotFoundImage} src={pikachuNotFound} alt='Not found image' />
-            <Tab className={styles.backLink} label='Back To Home page' value='/' key='0' to='/' component={Link} />
+            <img className={styles.notFoundPageImage} src={notFoundImage} alt="Not found image" />
+            <img className={styles.pikachuNotFoundImage} src={pikachuNotFound} alt="Not found image" />
+            <Tab className={styles.backLink} label="Back To Home page" value="/" key="0" to="/" component={Link} />
         </section>
     )
 }

@@ -1,35 +1,65 @@
-import { FC, useState, useEffect } from 'react';
+import { FC, useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
+import { PokemonContext } from 'context/PokemonContext';
 import { PokemonService } from 'services/PokemonService';
 import { ISinglePokemonResponse } from 'interfaces/Pokemon/ISinglePokemonResponse';
+import { ISpeciesPokemonResponse } from 'interfaces/Pokemon/ISpeciesPokemonResponse';
+import { Loader } from 'components/shared/Loader';
 
 import { Typography, Card, CardMedia, CardContent, CardActions, Accordion, AccordionSummary, AccordionDetails, Button } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import styles from './SinglePokemon.module.scss';
 
-const SinglePokemonPage: FC = (props) =>  {
+interface ISinglePokemon {
+    teamDisplay?: boolean;
+}
 
-    const [pokemon, setPokemon] = useState<ISinglePokemonResponse | null>(null);
+const SinglePokemonPage: FC<ISinglePokemon> = (props) =>  {
+
+    const { teamDisplay } = props;
+    const [ pokemon, setPokemon ] = useState<ISinglePokemonResponse | null>(null);
+    const [ isLoading, setIsLoading ] = useState<boolean>(false);
+    const [ showRemoveButton, setShowRemoveButton] = useState<boolean>(true);
+    const [ pokemonSpecies, setPokemonSpecies] = useState<ISpeciesPokemonResponse | null>(null);
+
     const { id } = useParams();
-
     const history = useNavigate();
+    const context = useContext(PokemonContext);
+    const { team, handleAddPokemon, handleRemovePokemon } = context;
 
     useEffect(() => {
 
-        isNaN(Number(id)) ?  history('*') : getPokemon();
+        Number.isNaN(Number(id)) ?  history('*') : getSinglePokemon();
 
     }, [])
 
+    const getPokemonSpecies = async (id: number) => {
+        if(!id) return;
+        setIsLoading(true);
+        const fetchedSpecies = await PokemonService.getSpecies(+id);
+        setPokemonSpecies(fetchedSpecies);
+        if(pokemon) {
+            pokemon.evolution_chain = fetchedSpecies;
+            setPokemon(pokemon);
+            console.log(pokemon, 'pokemon sad')
+        }
+    }
+
     const getPokemon = async () => {
         if(!id) return;
-
+        setIsLoading(true);
         const fetchedPokemon = await PokemonService.getById(+id);
+        await getPokemonSpecies(fetchedPokemon.id);
         setPokemon(fetchedPokemon);
     }
 
+    const getSinglePokemon = async () => {
+        await getPokemon();
+        setIsLoading(false);
+    }
+
     const parseName = (name: string) => name.replace('-', " ");
-    //
 
     const renderAbilities = pokemon && pokemon.abilities && 
         pokemon.abilities.map((ability, index) => (
@@ -42,19 +72,22 @@ const SinglePokemonPage: FC = (props) =>  {
 
     const renderMoves = pokemon && pokemon.moves && 
         pokemon.moves.map((move, index) => (
-            
         <li className={styles.pokemonProperty} key={index}>{ parseName(move.move.name) }</li>
     )).slice(0, 5);
 
-    const renderAddButton = <Button className={styles.pokemonAddButton}>Add to Team</Button>;
-
-    const renderRemoveButton =  <Button className={styles.pokemonRemoveButton}>Remove from Team</Button>
-
-
-    return pokemon ? (
+    const renderAddButton = pokemon && !teamDisplay && <Button disabled={team.length >= 6} className={styles.pokemonAddButton} onClick={() =>handleAddPokemon(pokemon)}>Add to Team</Button>;
+    const renderRemoveButton = pokemon && team.find(member => member.id === pokemon.id) && <Button className={styles.pokemonRemoveButton} onClick={() =>handleRemovePokemon(pokemon)}>Remove from Team</Button>
+    
+    // const renderSpecies = pokemonSpecies && (
+    //     <section>
+    //         { pokemonSpecies.evolution_chain.url }
+    //     </section>
+    // );
+    
+    const renderPokemon = pokemon &&
         <section className={styles.singlePokemonPage}>
-            <Typography variant="h6" className={styles.pokemonTitle} align="center" gutterBottom>
-                STATISTICS
+            <Typography variant="h6"className={styles.pokemonTitle} align="center" gutterBottom>
+                STATISTICS 
             </Typography>
             <Card className={styles.pokemonCard}>
                 <CardContent className={styles.singlePokemonAbout}> 
@@ -128,13 +161,27 @@ const SinglePokemonPage: FC = (props) =>  {
                         </Typography>
                         </AccordionDetails>
                     </Accordion>
+                    <Typography>Species</Typography>
+                    {/* { renderSpecies } */}
+                    { pokemon.evolution_chain?.evolution_chain.url}
                 </CardContent>
             </Card>
-        </section>
-    ) : (
-        <section className={styles.singlePokemonPage}>
-            <Typography variant="h6">There is no pokemon with this ID { id }.</Typography>
-        </section>
+        </section>;
+
+    const renderLoader = (
+        <section className={styles.singlePokemonPage}>  
+            <Loader></Loader>
+        </section>);
+
+    // const renderPage = () => {
+    //     if(isLoading) return renderLoader;
+    //     if(pokemon) return renderPokemon;
+    // }
+
+    return ( 
+        <>
+            { isLoading ? renderLoader : renderPokemon }
+        </> 
     )
 }
 

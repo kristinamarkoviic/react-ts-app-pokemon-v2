@@ -1,3 +1,5 @@
+import { ISpeciesPokemonResponse } from './ISpeciesPokemonResponse';
+
 interface IDefaultData {
     name: string;
     url: string;
@@ -95,4 +97,5 @@ export interface ISinglePokemonResponse {
     stats: Array<IStats>;
     types: Array<ITypes>;
     past_types: Array<any>;
+    evolution_chain: ISpeciesPokemonResponse;
 };

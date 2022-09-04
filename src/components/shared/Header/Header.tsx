@@ -22,7 +22,7 @@ const Header = () => {
         <>
             <header className={styles.header}>
                 <div className={styles.logo}>
-                    <img src={logo} alt='logo'/>
+                    <img src={logo} alt="logo" />
                 </div>
                 <Tabs 
                     value={currentTab}
